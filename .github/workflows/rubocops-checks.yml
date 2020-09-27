@@ -1,0 +1,24 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ReviewDog Rubocop Check
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ ungson ]
+  pull_request:
+    branches: [ ungson ]
+
+jobs:
+  rubocop:
+    name: runner / rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: rubocop
+        uses: dieunb/action-rubocop@v1.0.3
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-check # Default is github-pr-check

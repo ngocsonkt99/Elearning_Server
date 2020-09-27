@@ -1,0 +1,40 @@
+inherit_gem:
+  rubocop-rails_config:
+    - config/rails.yml
+
+require:
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - db/**/*
+    - db/migrate/**
+    - spec/spec_helper.rb
+    - bin/**/*
+    - node_modules/**/**
+    - config.ru
+    - config/**/*
+
+Style/Documentation:
+  Enabled: False
+
+Lint/RaiseException:
+  Enabled: True
+
+Lint/StructNewOverride:
+  Enabled: True
+
+Style/HashEachMethods:
+  Enabled: True
+
+Style/HashTransformKeys:
+  Enabled: True
+
+Style/HashTransformValues:
+  Enabled: True
+
+Style/StringLiterals:
+  Enabled: False
+
+Layout/LineLength:
+  Max: 120

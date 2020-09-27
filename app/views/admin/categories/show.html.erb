@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-lg-9">
+          <h3 class="text-center">Admin | Category: <%= @category.name %></h3>
+        </div>
+
+        <div class="col-lg-3">
+          <%= link_to "Edit", edit_admin_category_path, class: 'btn btn-primary' %>
+          <%= link_to "Delete",admin_category_path,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Content</th>
+          <th>Creation time</th>
+          <th>Update time</th>
+          <th>Answer Correct</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @words.each do |word| %>
+          <tr>
+            <td><%= link_to(word.content, admin_word_path(word)) %></td>
+            <td><%= word.created_at %></td>
+            <td><%= word.updated_at %></td>
+            <td><%= word.correct_answer&.content %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-13"><br>
+    <%= link_to "Words List", admin_words_path, class: 'btn btn-info pull-right' %>
+    <%= link_to "Back", admin_categories_path, class: 'btn btn-info pull-right' %>
+  </div>
+</div>

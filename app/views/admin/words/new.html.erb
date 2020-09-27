@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-offset-3 col-lg-6">
+      <h1 class="text-center">Create Word </h1>
+      <%= form_for @word, url: admin_words_path do |f| %>
+        <%= render 'shared/errors_messages', object: @word %>
+
+        <div class="form-group col-md-7">
+          <%= f.label :content %>
+          <%= f.text_field :content, class: 'form-control', placeholder: "Enter your content Word" %><br>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :category %>
+          <%= f.collection_select :category_id, @categories, :id, :name, include_blank: true %>
+        </div>
+
+        <%= f.fields_for :word_answers do |builder| %>
+          <div class="">
+            <%= render "word_answer_fields", :f => builder %>
+          </div>
+        <% end %>
+        <div class="text-center">
+          <%= f.submit "Create", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+      <%= link_to 'Home Admin', admin_root_path, class: 'btn btn-info pull-right' %>
+      <%= link_to "Back", admin_words_path, class: 'btn btn-info pull-right' %>
+    </div>
+  </div>
+</div>

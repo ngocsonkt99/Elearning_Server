@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-offset-3 col-lg-6">
+      <div class="text-left">
+        <label>
+          <strong>Email:</strong>
+          <%= @user.email %>
+        </label><br>
+        <label>
+          <strong>fullname:</strong>
+          <%= @user.fullname %>
+        </label><br>
+        <label>
+          <strong>Avatar:</strong>
+          <%= image_tag(@user.avatar_url) if @user.avatar? %>
+        </label>
+      </div>
+      <div class="col-lg-offset-3 col-lg-6">
+        <% if signed_in? %>
+          <% if @user == current_user %>
+            <div class="row">
+              <div class="col-lg-6">
+                <strong id="following"><%= link_to @user.following.count %></strong>
+                <div>following</div>
+              </div>
+              <div class="col-lg-6">
+                <strong id="followers"><%= link_to @user.followers.count %></strong>
+                <div>followers</div>
+              </div>
+            </div>
+          <% else %>
+            <% if current_user.following?(@user) %>
+              <%= button_to 'Following', relationship_path(user_id: @user.id), class: 'btn unfollow-button', method: :delete %>
+            <% else %>
+              <%= button_to 'Follow', relationships_path(user_id: @user.id), class: 'btn follow-button' %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="row">
+            <div class="col-lg-6">
+              <strong id="following"><%= link_to @user.following.count %></strong>
+              <div>following</div>
+            </div>
+            <div class="col-lg-6">
+              <strong id="followers"><%= link_to @user.followers.count %></strong>
+              <div>followers</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to "Edit", edit_user_path(@user), class:"btn btn-primary" %>
+      <%= link_to "Log_out", log_out_path, method: :delete %>
+    </div>
+  </div>
+</div>

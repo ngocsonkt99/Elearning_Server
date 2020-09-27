@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1>Do lesson of <%= @lesson.category.name %></h1>
+      <%= form_for @lesson do |f| %>
+        <ol>
+          <%= f.fields_for :lesson_words do |flw| %>
+            <% lesson_word = flw.object %>
+            <li><%= lesson_word.word.content %></li>
+            <% lesson_word.word.word_answers.each do |word_answer| %>
+              <div class="form-check">
+                <%= flw.radio_button :word_answer_id, word_answer.id, class: "form-check-input", id: "word_answer_#{word_answer.id}" %>
+                <label class="form-check-label" for="<%= "word_answer_#{word_answer.id}" %>">
+                  <%= word_answer.content %>
+                </label>
+              </div>
+            <% end %>
+          <% end %>
+        </ol>
+        <%= f.submit "Submit", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
